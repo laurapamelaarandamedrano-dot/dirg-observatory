@@ -1,0 +1,9 @@
+record_id,cve_ent,infrastructure_type,announced_date,operational_date,date_precision,availability_zones,location_confidence,source_ids,notes
+DI-001,15,cloud_region,,2019,year,,secondary,S27,"First public-cloud data centre of a hyperscale provider reported in Estado de México; opening reported at year precision."
+DI-002,15,cloud_region,,2021,year,,secondary,S27,"Second region of the same provider, Tultitlán, Estado de México; reported opened 2021."
+DI-003,22,cloud_region,,2022-07-15,day,1,primary,S20,"Provider release note."
+DI-004,19,cloud_region,,2023-07-13,day,1,primary,S21,"Provider release note; Monterrey metropolitan area."
+DI-005,22,cloud_region,,2024-05-08,day,,secondary,S22,"Reported as available on the publication date; Querétaro metropolitan area."
+DI-006,22,cloud_region,2022-07,2024-12,month,,secondary,S23,"Announced July 2022; location confirmed 2023; launched December 2024."
+DI-007,22,cloud_region,2024-02-25,2025-01-14,day,3,secondary,S24|S25,"Opening date from provider (primary); state attribution from provider press release of announcement (secondary)."
+DI-008,22,cloud_region,2024-05,2025-02,month,1,secondary,S26,"Announced May 2024; operational February 2025."

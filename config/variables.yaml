@@ -1,0 +1,255 @@
+# Variable dictionary. Single source of truth for every variable the pipeline emits.
+# pillar: W (water) | E (energy) | D (digital infrastructure) | V (vulnerability/territory)
+#         G (governance; never in the index) | C (context; never in the index)
+# in_index: whether the variable enters SRTI / RBI pillar scores.
+# direction: +1 means a higher raw value = more pressure/tension.
+# transform: none | log1p
+# epistemic_status: default status of values (a row may override it).
+
+pillars:
+  W: {en: "Water pressure", es: "Presión hídrica"}
+  E: {en: "Energy-system intensity", es: "Intensidad del sistema energético"}
+  D: {en: "Digital infrastructure", es: "Infraestructura digital"}
+  V: {en: "Territorial vulnerability", es: "Vulnerabilidad territorial"}
+  G: {en: "Governance context", es: "Contexto de gobernanza"}
+  C: {en: "Context", es: "Contexto"}
+
+variables:
+
+  w_drought_intensity:
+    pillar: W
+    in_index: true
+    direction: 1
+    transform: none
+    unit: "score 0-100"
+    epistemic_status: derived
+    source_ids: [S01]
+    label: {en: "Drought intensity", es: "Intensidad de la sequía"}
+    definition:
+      en: "Mean drought category across all municipalities of the state and all Drought Monitor maps issued in the year (none/D0 = 0, D1 = 1 … D4 = 4), rescaled to 0-100. Municipalities are weighted equally."
+      es: "Categoría media de sequía en todos los municipios del estado y todos los mapas del Monitor emitidos en el año (sin sequía/D0 = 0, D1 = 1 … D4 = 4), reescalada a 0-100. Los municipios pesan igual."
+    plausible_range: [0, 100]
+
+  w_drought_share:
+    pillar: W
+    in_index: false
+    direction: 1
+    transform: none
+    unit: "%"
+    epistemic_status: derived
+    source_ids: [S01]
+    label: {en: "Municipality-maps in drought (D1-D4)", es: "Municipios-mapa en sequía (D1-D4)"}
+    definition:
+      en: "Share of municipality × map observations in the year classified D1 or worse."
+      es: "Proporción de observaciones municipio × mapa del año clasificadas D1 o más."
+    plausible_range: [0, 100]
+
+  w_aquifer_deficit_share:
+    pillar: W
+    in_index: true
+    direction: 1
+    transform: none
+    unit: "% of aquifers"
+    epistemic_status: administrative
+    source_ids: [S03]
+    label: {en: "Aquifers without availability", es: "Acuíferos sin disponibilidad"}
+    definition:
+      en: "Share of the aquifers that CONAGUA assigns to the state whose mean annual availability (DMA) is negative, per the 2023 publication."
+      es: "Proporción de los acuíferos que CONAGUA asigna al estado con disponibilidad media anual (DMA) negativa, según la publicación 2023."
+    plausible_range: [0, 100]
+
+  w_aquifer_deficit_volume_pc:
+    pillar: W
+    in_index: false
+    direction: 1
+    transform: none
+    unit: "m³ per person per year"
+    epistemic_status: derived
+    source_ids: [S03, S02]
+    label: {en: "Groundwater deficit per person", es: "Déficit de agua subterránea por persona"}
+    definition:
+      en: "Sum of negative DMA volumes of the state's aquifers divided by mid-year population."
+      es: "Suma de los volúmenes de DMA negativa de los acuíferos del estado entre la población a mitad de año."
+    plausible_range: [0, 100000]
+
+  e_capacity_per_100k:
+    pillar: E
+    in_index: true
+    direction: 1
+    transform: log1p
+    unit: "MW per 100,000 people"
+    epistemic_status: derived
+    source_ids: [S07, S02]
+    label: {en: "Authorized generation capacity in operation", es: "Capacidad de generación autorizada en operación"}
+    definition:
+      en: "Authorized capacity (MW) of CNE generation permits whose stated operation date is on or before 31 December of the year and that had not ended by then, per 100,000 inhabitants. Import/export permits excluded. Authorized ≠ installed or dispatched."
+      es: "Capacidad autorizada (MW) de permisos de generación de la CNE con fecha de operación al 31 de diciembre del año o antes y no terminados para entonces, por cada 100,000 habitantes. Excluye importación/exportación. Autorizada ≠ instalada o despachada."
+    plausible_range: [0, 100000]
+
+  e_combustion_share:
+    pillar: E
+    in_index: true
+    direction: 1
+    transform: none
+    unit: "% of authorized MW"
+    epistemic_status: derived
+    source_ids: [S07]
+    label: {en: "Combustion-based share of capacity", es: "Proporción de capacidad basada en combustión"}
+    definition:
+      en: "Share of the capacity above that uses combustion technologies (combined cycle, conventional thermal, gas turbine, internal combustion, coal, cogeneration, bioenergy). These technologies are the ones that typically require cooling water and emit at the point of generation."
+      es: "Proporción de la capacidad anterior que usa tecnologías de combustión (ciclo combinado, termoeléctrica convencional, turbogás, combustión interna, carbón, cogeneración, bioenergía): las que típicamente requieren agua de enfriamiento y emiten en el sitio."
+    plausible_range: [0, 100]
+
+  e_selfsupply_new_mw_3y:
+    pillar: C
+    in_index: false
+    direction: 1
+    transform: none
+    unit: "MW"
+    epistemic_status: derived
+    source_ids: [S07]
+    label: {en: "New self-supply capacity (3-year window)", es: "Nueva capacidad de autoabastecimiento (ventana de 3 años)"}
+    definition:
+      en: "Authorized MW of self-supply/autoconsumo permits (AUT., AUTC) whose operation date falls in the 3 years ending in the given year."
+      es: "MW autorizados de permisos de autoabastecimiento/autoconsumo (AUT., AUTC) con fecha de operación en los 3 años que terminan en el año dado."
+    plausible_range: [0, 100000]
+
+  d_cloud_regions:
+    pillar: D
+    in_index: true
+    direction: 1
+    transform: log1p
+    unit: "regions"
+    epistemic_status: documentary
+    source_ids: [S20, S21, S22, S23, S24, S25, S26, S27]
+    label: {en: "Hyperscale cloud regions in operation", es: "Regiones de nube a hiperescala en operación"}
+    definition:
+      en: "Number of public-cloud regions of hyperscale providers reported operational in the state by 31 December of the year (by 4 October for 2026). Built from a documentary register; operator identities are not part of the dataset."
+      es: "Número de regiones de nube pública de proveedores a hiperescala reportadas en operación en el estado al 31 de diciembre del año (al 4 de octubre para 2026). Se construye con un registro documental; la identidad de los operadores no forma parte del conjunto de datos."
+    plausible_range: [0, 50]
+
+  d_cloud_regions_announced:
+    pillar: C
+    in_index: false
+    direction: 1
+    transform: none
+    unit: "regions"
+    epistemic_status: documentary
+    source_ids: [S23, S25, S26]
+    label: {en: "Announced, not yet operational regions", es: "Regiones anunciadas aún no operativas"}
+    definition:
+      en: "Regions publicly announced by year end but not yet operational."
+      es: "Regiones anunciadas públicamente al cierre del año pero aún no operativas."
+    plausible_range: [0, 50]
+
+  v_pop_density:
+    pillar: V
+    in_index: true
+    direction: 1
+    transform: log1p
+    unit: "people per km²"
+    epistemic_status: modelled
+    source_ids: [S02, S12]
+    label: {en: "Population density", es: "Densidad de población"}
+    definition:
+      en: "CONAPO mid-year population divided by state area computed from generalized Natural Earth boundaries (equal-area projection)."
+      es: "Población a mitad de año de CONAPO entre la superficie estatal calculada con límites generalizados de Natural Earth (proyección de áreas iguales)."
+    plausible_range: [0, 10000]
+
+  v_marginalization:
+    pillar: V
+    in_index: true
+    direction: -1
+    transform: none
+    unit: "index 0-100 (higher = less marginalized)"
+    epistemic_status: derived
+    source_ids: [S08]
+    label: {en: "Marginalization index (2020)", es: "Índice de marginación (2020)"}
+    definition:
+      en: "CONAPO normalized marginalization index 2020 (IMN_2020) × 100. In CONAPO's 2020 method a HIGHER value means LOWER marginalization, so the index uses direction -1. Single vintage; carried forward with a recency penalty in the coverage score."
+      es: "Índice de marginación normalizado de CONAPO 2020 (IMN_2020) × 100. En el método 2020 de CONAPO un valor MAYOR significa MENOR marginación, por lo que el índice usa dirección -1. Una sola edición; se arrastra con penalización por antigüedad en la cobertura."
+    plausible_range: [0, 100]
+
+  v_drought_vulnerability:
+    pillar: V
+    in_index: true
+    direction: 1
+    transform: none
+    unit: "probability 0-100"
+    epistemic_status: modelled
+    source_ids: [S09]
+    label: {en: "Drought vulnerability", es: "Vulnerabilidad a la sequía"}
+    definition:
+      en: "Mean across municipalities of the average of CONAGUA-PRONACOSE social, economic and environmental drought-vulnerability probabilities. Undated vintage."
+      es: "Media municipal del promedio de las probabilidades de vulnerabilidad social, económica y ambiental a la sequía de CONAGUA-PRONACOSE. Edición sin fecha."
+    plausible_range: [0, 100]
+
+  c_population:
+    pillar: C
+    in_index: false
+    direction: 1
+    transform: none
+    unit: "people"
+    epistemic_status: modelled
+    source_ids: [S02]
+    label: {en: "Mid-year population", es: "Población a mitad de año"}
+    definition:
+      en: "CONAPO mid-year population (projection from 2020)."
+      es: "Población a mitad de año de CONAPO (proyección desde 2020)."
+    plausible_range: [100000, 30000000]
+
+  c_pop_growth_5y:
+    pillar: C
+    in_index: false
+    direction: 1
+    transform: none
+    unit: "% over 5 years"
+    epistemic_status: modelled
+    source_ids: [S02]
+    label: {en: "Population growth (5 years)", es: "Crecimiento poblacional (5 años)"}
+    definition:
+      en: "Percent change in CONAPO mid-year population over the previous 5 years."
+      es: "Cambio porcentual de la población a mitad de año de CONAPO en los 5 años previos."
+    plausible_range: [-50, 100]
+
+  g_groundwater_ordinance_area:
+    pillar: G
+    in_index: false
+    direction: 0
+    transform: none
+    unit: "% of state area"
+    epistemic_status: geospatial
+    source_ids: [S04, S05, S06, S12]
+    label: {en: "Area under groundwater ordinances", es: "Superficie bajo ordenamientos de agua subterránea"}
+    definition:
+      en: "Share of state area covered by the union of groundwater vedas, regulations/reserves and suspension-of-free-pumping agreements whose DOF date is on or before the year, as mapped by CONAGUA. Descriptive; implies no legal assessment."
+      es: "Proporción de la superficie estatal cubierta por la unión de vedas, reglamentos/reservas y acuerdos de suspensión de libre alumbramiento con fecha DOF al año o antes, según la cartografía de CONAGUA. Descriptivo; no implica valoración jurídica."
+    plausible_range: [0, 100]
+
+  g_veda_area:
+    pillar: G
+    in_index: false
+    direction: 0
+    transform: none
+    unit: "% of state area"
+    epistemic_status: geospatial
+    source_ids: [S04, S12]
+    label: {en: "Area under groundwater vedas", es: "Superficie bajo vedas de agua subterránea"}
+    definition:
+      en: "Share of state area under groundwater vedas with DOF date on or before the year."
+      es: "Proporción de la superficie estatal bajo vedas de agua subterránea con fecha DOF al año o antes."
+    plausible_range: [0, 100]
+
+  g_climate_instruments:
+    pillar: G
+    in_index: false
+    direction: 0
+    transform: none
+    unit: "instruments"
+    epistemic_status: documentary
+    source_ids: [S10]
+    label: {en: "State climate-policy instruments published", es: "Instrumentos estatales de política climática publicados"}
+    definition:
+      en: "Number of state climate-policy instruments in the INECC register reported as available, with publication year on or before the year. Counts presence, not quality or enforcement."
+      es: "Número de instrumentos estatales de política climática del registro INECC reportados como disponibles, con año de publicación al año o antes. Cuenta presencia, no calidad ni cumplimiento."
+    plausible_range: [0, 100]

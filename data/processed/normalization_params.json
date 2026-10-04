@@ -1,0 +1,128 @@
+{
+  "minmax_pooled": {
+    "w_drought_intensity": {
+      "method": "minmax_pooled",
+      "lo": 0.0,
+      "hi": 56.659980000000004,
+      "winsorized": true
+    },
+    "w_aquifer_deficit_share": {
+      "method": "minmax_pooled",
+      "lo": 0.0,
+      "hi": 100.0,
+      "winsorized": true
+    },
+    "e_capacity_per_100k": {
+      "method": "minmax_pooled",
+      "lo": 1.6549023257705167,
+      "hi": 6.0214806888337495,
+      "winsorized": true
+    },
+    "e_combustion_share": {
+      "method": "minmax_pooled",
+      "lo": 1.74144,
+      "hi": 100.0,
+      "winsorized": true
+    },
+    "d_cloud_regions": {
+      "method": "minmax_pooled",
+      "lo": 0.0,
+      "hi": 1.791759469228055,
+      "winsorized": false
+    },
+    "v_pop_density": {
+      "method": "minmax_pooled",
+      "lo": 2.5831374705479866,
+      "hi": 8.809329520267438,
+      "winsorized": true
+    },
+    "v_marginalization": {
+      "method": "minmax_pooled",
+      "lo": -86.2496,
+      "hi": -40.4281,
+      "winsorized": true
+    },
+    "v_drought_vulnerability": {
+      "method": "minmax_pooled",
+      "lo": 25.0906,
+      "hi": 63.3565,
+      "winsorized": true
+    }
+  },
+  "percentile_pooled": {
+    "w_drought_intensity": {
+      "method": "percentile_pooled",
+      "n_ref": 192
+    },
+    "w_aquifer_deficit_share": {
+      "method": "percentile_pooled",
+      "n_ref": 96
+    },
+    "e_capacity_per_100k": {
+      "method": "percentile_pooled",
+      "n_ref": 192
+    },
+    "e_combustion_share": {
+      "method": "percentile_pooled",
+      "n_ref": 192
+    },
+    "d_cloud_regions": {
+      "method": "percentile_pooled",
+      "n_ref": 192
+    },
+    "v_pop_density": {
+      "method": "percentile_pooled",
+      "n_ref": 192
+    },
+    "v_marginalization": {
+      "method": "percentile_pooled",
+      "n_ref": 192
+    },
+    "v_drought_vulnerability": {
+      "method": "percentile_pooled",
+      "n_ref": 192
+    }
+  },
+  "zscore_pooled": {
+    "w_drought_intensity": {
+      "method": "zscore_pooled",
+      "mean": 16.318614583333332,
+      "sd": 16.017575510897
+    },
+    "w_aquifer_deficit_share": {
+      "method": "zscore_pooled",
+      "mean": 39.3075,
+      "sd": 29.32092326522137
+    },
+    "e_capacity_per_100k": {
+      "method": "zscore_pooled",
+      "mean": 4.475694880959538,
+      "sd": 0.9029777011655361
+    },
+    "e_combustion_share": {
+      "method": "zscore_pooled",
+      "mean": 63.707598958333335,
+      "sd": 33.80806764511183
+    },
+    "d_cloud_regions": {
+      "method": "zscore_pooled",
+      "mean": 0.06682290810962586,
+      "sd": 0.2621261140648878
+    },
+    "v_pop_density": {
+      "method": "zscore_pooled",
+      "mean": 4.441705833980962,
+      "sd": 1.2822163671297597
+    },
+    "v_marginalization": {
+      "method": "zscore_pooled",
+      "mean": -70.85814375,
+      "sd": 10.705426131287858
+    },
+    "v_drought_vulnerability": {
+      "method": "zscore_pooled",
+      "mean": 47.867115625,
+      "sd": 9.586415050251755
+    }
+  }
+}

@@ -1,0 +1,18 @@
+method_id,method
+w_drought_intensity,"Mean drought category across all municipalities of the state and all Drought Monitor maps issued in the year (none/D0 = 0, D1 = 1 … D4 = 4), rescaled to 0-100. Municipalities are weighted equally."
+w_drought_share,Share of municipality × map observations in the year classified D1 or worse.
+w_aquifer_deficit_share,"Share of the aquifers that CONAGUA assigns to the state whose mean annual availability (DMA) is negative, per the 2023 publication."
+w_aquifer_deficit_volume_pc,Sum of negative DMA volumes of the state's aquifers divided by mid-year population.
+e_capacity_per_100k,"Authorized capacity (MW) of CNE generation permits whose stated operation date is on or before 31 December of the year and that had not ended by then, per 100,000 inhabitants. Import/export permits excluded. Authorized ≠ installed or dispatched."
+e_combustion_share,"Share of the capacity above that uses combustion technologies (combined cycle, conventional thermal, gas turbine, internal combustion, coal, cogeneration, bioenergy). These technologies are the ones that typically require cooling water and emit at the point of generation."
+e_selfsupply_new_mw_3y,"Authorized MW of self-supply/autoconsumo permits (AUT., AUTC) whose operation date falls in the 3 years ending in the given year."
+d_cloud_regions,Number of public-cloud regions of hyperscale providers reported operational in the state by 31 December of the year (by 4 October for 2026). Built from a documentary register; operator identities are not part of the dataset.
+d_cloud_regions_announced,Regions publicly announced by year end but not yet operational.
+v_pop_density,CONAPO mid-year population divided by state area computed from generalized Natural Earth boundaries (equal-area projection).
+v_marginalization,"CONAPO normalized marginalization index 2020 (IMN_2020) × 100. In CONAPO's 2020 method a HIGHER value means LOWER marginalization, so the index uses direction -1. Single vintage; carried forward with a recency penalty in the coverage score."
+v_drought_vulnerability,"Mean across municipalities of the average of CONAGUA-PRONACOSE social, economic and environmental drought-vulnerability probabilities. Undated vintage."
+c_population,CONAPO mid-year population (projection from 2020).
+c_pop_growth_5y,Percent change in CONAPO mid-year population over the previous 5 years.
+g_groundwater_ordinance_area,"Share of state area covered by the union of groundwater vedas, regulations/reserves and suspension-of-free-pumping agreements whose DOF date is on or before the year, as mapped by CONAGUA. Descriptive; implies no legal assessment."
+g_veda_area,Share of state area under groundwater vedas with DOF date on or before the year.
+g_climate_instruments,"Number of state climate-policy instruments in the INECC register reported as available, with publication year on or before the year. Counts presence, not quality or enforcement."

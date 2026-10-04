@@ -1,0 +1,863 @@
+{
+  "summary": {
+    "generated": "2026-10-04",
+    "as_of_date": "2026-10-04",
+    "observations": 4352,
+    "observations_with_value": 4032,
+    "territories": 32,
+    "years": [
+      2020,
+      2027
+    ],
+    "variables": 17,
+    "sources_registered": 31,
+    "index_cells": {
+      "total": 2048,
+      "complete": 1312,
+      "partial": 576,
+      "missing": 160,
+      "complete_pct": 64.1,
+      "partial_pct": 28.1,
+      "missing_pct": 7.8
+    },
+    "coverage_tiers": {
+      "moderate": 224,
+      "limited": 32
+    },
+    "checks": {
+      "pass": 30,
+      "warn": 0,
+      "fail": 0
+    }
+  },
+  "checks": [
+    {
+      "check": "duplicate_observations",
+      "status": "pass",
+      "severity": "error",
+      "detail": "territory × year × variable must be unique",
+      "count": 0
+    },
+    {
+      "check": "geographic_identifiers",
+      "status": "pass",
+      "severity": "error",
+      "detail": "unknown territory ids: []",
+      "count": 0
+    },
+    {
+      "check": "variables_registered",
+      "status": "pass",
+      "severity": "error",
+      "detail": "variables not in config/variables.yaml: []",
+      "count": 0
+    },
+    {
+      "check": "units_consistent",
+      "status": "pass",
+      "severity": "error",
+      "detail": "variables with inconsistent units: []",
+      "count": 0
+    },
+    {
+      "check": "impossible_values",
+      "status": "pass",
+      "severity": "error",
+      "detail": "values outside plausible_range: ",
+      "count": 0
+    },
+    {
+      "check": "missing_years",
+      "status": "pass",
+      "severity": "info",
+      "detail": "years with no value at all, by variable: {\"d_cloud_regions\": [2027], \"d_cloud_regions_announced\": [2027], \"w_aquifer_deficit_share\": [2020, 2021, 2022], \"w_aquifer_deficit_volume_pc\": [2020, 2021, 2022], \"w_drought_intensity\": [2027], \"w_drought_share\": [2027]}",
+      "count": 10
+    },
+    {
+      "check": "unknown_never_has_value",
+      "status": "pass",
+      "severity": "error",
+      "detail": "rows marked unknown must have an empty value",
+      "count": 0
+    },
+    {
+      "check": "missing_never_zero",
+      "status": "pass",
+      "severity": "error",
+      "detail": "empty values must be marked unknown (never silently zero)",
+      "count": 0
+    },
+    {
+      "check": "outliers_flagged",
+      "status": "pass",
+      "severity": "info",
+      "detail": "robust z > 5 within variable-year (flagged for review, NOT removed)",
+      "count": 88
+    },
+    {
+      "check": "source_registry_match",
+      "status": "pass",
+      "severity": "error",
+      "detail": "source ids not in registry: []",
+      "count": 0
+    },
+    {
+      "check": "variable_sources_registered",
+      "status": "pass",
+      "severity": "error",
+      "detail": "variable source ids not in registry: []",
+      "count": 0
+    },
+    {
+      "check": "source_metadata_complete",
+      "status": "pass",
+      "severity": "error",
+      "detail": "missing: []",
+      "count": 0
+    },
+    {
+      "check": "variable_metadata_complete",
+      "status": "pass",
+      "severity": "error",
+      "detail": "variables lacking EN/ES definitions: []",
+      "count": 0
+    },
+    {
+      "check": "normalization_range",
+      "status": "pass",
+      "severity": "error",
+      "detail": "normalized indicators must lie in [0, 100]",
+      "count": 0
+    },
+    {
+      "check": "composite_range",
+      "status": "pass",
+      "severity": "error",
+      "detail": "composite values must lie in [0, 100]",
+      "count": 0
+    },
+    {
+      "check": "no_illustrative_rows",
+      "status": "pass",
+      "severity": "error",
+      "detail": "observations not flagged public (illustrative/restricted)",
+      "count": 0
+    },
+    {
+      "check": "geometry_valid",
+      "status": "pass",
+      "severity": "warn",
+      "detail": "invalid geometries (repaired with make_valid when used): 0",
+      "count": 0
+    },
+    {
+      "check": "coordinates_in_mexico",
+      "status": "pass",
+      "severity": "error",
+      "detail": "bounds [np.float64(-118.37), np.float64(14.55), np.float64(-86.7), np.float64(32.71)]",
+      "count": null
+    },
+    {
+      "check": "ingest:S01:INFO_MAPS",
+      "status": "pass",
+      "severity": "info",
+      "detail": "435 drought maps, 2478 municipalities, last map 2026-09-15",
+      "count": null
+    },
+    {
+      "check": "ingest:S03:INFO_AQUIFERS",
+      "status": "pass",
+      "severity": "info",
+      "detail": "653 aquifers; 286 with negative availability",
+      "count": null
+    },
+    {
+      "check": "ingest:S07:UNMATCHED_STATE",
+      "status": "pass",
+      "severity": "info",
+      "detail": "permits without a recognisable state (e.g. 'PERMISO RENUNCIADO', 'sin dato'); excluded: ['PERMISO RENUNCIADO', 'Texas', 'sin dato']",
+      "count": 161
+    },
+    {
+      "check": "ingest:S07:EXCLUDED_IMPORT_EXPORT",
+      "status": "pass",
+      "severity": "info",
+      "detail": "import/export permits excluded",
+      "count": 77
+    },
+    {
+      "check": "ingest:S07:MISSING_CAPACITY",
+      "status": "pass",
+      "severity": "info",
+      "detail": "permits with no authorized capacity; excluded",
+      "count": 4
+    },
+    {
+      "check": "ingest:S07:IMPOSSIBLE_VALUE",
+      "status": "pass",
+      "severity": "info",
+      "detail": "authorized capacity > 5,000 MW for a single permit (max 3,304,269 MW); excluded as data-entry error",
+      "count": 12
+    },
+    {
+      "check": "ingest:S07:SUSPECT_UNIT",
+      "status": "pass",
+      "severity": "info",
+      "detail": "permits > 100 MW whose estimated annual generation implies a capacity factor < 0.2% (likely kW recorded as MW); excluded",
+      "count": 16
+    },
+    {
+      "check": "ingest:S07:OP_DATE_IMPUTED",
+      "status": "pass",
+      "severity": "info",
+      "detail": "ended permits without an operation date: grant date used as start (flagged)",
+      "count": 1091
+    },
+    {
+      "check": "ingest:S07:ENDED_WITHOUT_DATE",
+      "status": "pass",
+      "severity": "info",
+      "detail": "permits marked ended but with no end date; excluded from all years",
+      "count": 99
+    },
+    {
+      "check": "ingest:S07:INFO_PERMITS",
+      "status": "pass",
+      "severity": "info",
+      "detail": "2545 permits in file; 2176 usable after exclusions",
+      "count": null
+    },
+    {
+      "check": "ingest:S09:INFO_MUNICIPALITIES",
+      "status": "pass",
+      "severity": "info",
+      "detail": "2463 municipalities; rows with any missing component: 0",
+      "count": null
+    },
+    {
+      "check": "ingest:S10:NO_PUBLICATION_YEAR",
+      "status": "pass",
+      "severity": "info",
+      "detail": "available instruments without publication year; not counted",
+      "count": 35
+    }
+  ],
+  "outliers": [
+    {
+      "variable": "c_pop_growth_5y",
+      "year": 2020,
+      "territory": "Quintana Roo",
+      "value": 22.0665,
+      "robust_z": 6.8
+    },
+    {
+      "variable": "c_pop_growth_5y",
+      "year": 2021,
+      "territory": "Quintana Roo",
+      "value": 19.3802,
+      "robust_z": 5.6
+    },
+    {
+      "variable": "c_pop_growth_5y",
+      "year": 2022,
+      "territory": "Quintana Roo",
+      "value": 16.7292,
+      "robust_z": 5.5
+    },
+    {
+      "variable": "c_population",
+      "year": 2020,
+      "territory": "Estado de México",
+      "value": 17236788.0,
+      "robust_z": 7.0
+    },
+    {
+      "variable": "c_population",
+      "year": 2021,
+      "territory": "Estado de México",
+      "value": 17291050.0,
+      "robust_z": 7.0
+    },
+    {
+      "variable": "c_population",
+      "year": 2022,
+      "territory": "Estado de México",
+      "value": 17379644.0,
+      "robust_z": 7.0
+    },
+    {
+      "variable": "c_population",
+      "year": 2023,
+      "territory": "Estado de México",
+      "value": 17501220.0,
+      "robust_z": 6.9
+    },
+    {
+      "variable": "c_population",
+      "year": 2024,
+      "territory": "Estado de México",
+      "value": 17616018.0,
+      "robust_z": 6.9
+    },
+    {
+      "variable": "c_population",
+      "year": 2025,
+      "territory": "Estado de México",
+      "value": 17723173.0,
+      "robust_z": 6.9
+    },
+    {
+      "variable": "c_population",
+      "year": 2026,
+      "territory": "Estado de México",
+      "value": 17822420.0,
+      "robust_z": 6.8
+    },
+    {
+      "variable": "c_population",
+      "year": 2027,
+      "territory": "Estado de México",
+      "value": 17914087.0,
+      "robust_z": 6.8
+    },
+    {
+      "variable": "e_capacity_per_100k",
+      "year": 2022,
+      "territory": "Colima",
+      "value": 509.2942,
+      "robust_z": 5.2
+    },
+    {
+      "variable": "e_combustion_share",
+      "year": 2023,
+      "territory": "Aguascalientes",
+      "value": 0.737,
+      "robust_z": -5.6
+    },
+    {
+      "variable": "e_combustion_share",
+      "year": 2023,
+      "territory": "Chiapas",
+      "value": 1.912,
+      "robust_z": -5.5
+    },
+    {
+      "variable": "e_combustion_share",
+      "year": 2023,
+      "territory": "Michoacán",
+      "value": 5.136,
+      "robust_z": -5.3
+    },
+    {
+      "variable": "e_combustion_share",
+      "year": 2023,
+      "territory": "Nayarit",
+      "value": 2.671,
+      "robust_z": -5.4
+    },
+    {
+      "variable": "e_combustion_share",
+      "year": 2023,
+      "territory": "Oaxaca",
+      "value": 6.34,
+      "robust_z": -5.2
+    },
+    {
+      "variable": "e_combustion_share",
+      "year": 2023,
+      "territory": "Zacatecas",
+      "value": 5.373,
+      "robust_z": -5.3
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2020,
+      "territory": "Baja California",
+      "value": 97.463,
+      "robust_z": -11.7
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2020,
+      "territory": "Baja California Sur",
+      "value": 98.67,
+      "robust_z": -5.8
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2020,
+      "territory": "Colima",
+      "value": 96.19,
+      "robust_z": -17.9
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2020,
+      "territory": "Oaxaca",
+      "value": 95.774,
+      "robust_z": -19.9
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2020,
+      "territory": "Quintana Roo",
+      "value": 98.312,
+      "robust_z": -7.5
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2021,
+      "territory": "Baja California",
+      "value": 97.463,
+      "robust_z": -12.0
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2021,
+      "territory": "Baja California Sur",
+      "value": 98.67,
+      "robust_z": -6.0
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2021,
+      "territory": "Colima",
+      "value": 96.19,
+      "robust_z": -18.4
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2021,
+      "territory": "Quintana Roo",
+      "value": 98.312,
+      "robust_z": -7.8
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2021,
+      "territory": "Tamaulipas",
+      "value": 98.841,
+      "robust_z": -5.1
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2022,
+      "territory": "Baja California",
+      "value": 97.463,
+      "robust_z": -12.0
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2022,
+      "territory": "Baja California Sur",
+      "value": 98.67,
+      "robust_z": -6.0
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2022,
+      "territory": "Colima",
+      "value": 96.19,
+      "robust_z": -18.4
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2022,
+      "territory": "Quintana Roo",
+      "value": 98.312,
+      "robust_z": -7.8
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2022,
+      "territory": "Tamaulipas",
+      "value": 98.841,
+      "robust_z": -5.1
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2023,
+      "territory": "Baja California",
+      "value": 97.463,
+      "robust_z": -12.0
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2023,
+      "territory": "Baja California Sur",
+      "value": 98.67,
+      "robust_z": -6.0
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2023,
+      "territory": "Colima",
+      "value": 96.19,
+      "robust_z": -18.4
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2023,
+      "territory": "Quintana Roo",
+      "value": 98.312,
+      "robust_z": -7.8
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2023,
+      "territory": "Tamaulipas",
+      "value": 98.841,
+      "robust_z": -5.1
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2024,
+      "territory": "Baja California",
+      "value": 97.463,
+      "robust_z": -12.0
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2024,
+      "territory": "Baja California Sur",
+      "value": 98.67,
+      "robust_z": -6.0
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2024,
+      "territory": "Colima",
+      "value": 96.19,
+      "robust_z": -18.4
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2024,
+      "territory": "Quintana Roo",
+      "value": 98.312,
+      "robust_z": -7.8
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2024,
+      "territory": "Tamaulipas",
+      "value": 98.841,
+      "robust_z": -5.1
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2025,
+      "territory": "Baja California",
+      "value": 97.463,
+      "robust_z": -12.0
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2025,
+      "territory": "Baja California Sur",
+      "value": 98.67,
+      "robust_z": -6.0
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2025,
+      "territory": "Colima",
+      "value": 96.19,
+      "robust_z": -18.4
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2025,
+      "territory": "Quintana Roo",
+      "value": 98.312,
+      "robust_z": -7.8
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2025,
+      "territory": "Tamaulipas",
+      "value": 98.841,
+      "robust_z": -5.1
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2026,
+      "territory": "Baja California",
+      "value": 97.463,
+      "robust_z": -12.0
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2026,
+      "territory": "Baja California Sur",
+      "value": 98.67,
+      "robust_z": -6.0
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2026,
+      "territory": "Colima",
+      "value": 96.19,
+      "robust_z": -18.4
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2026,
+      "territory": "Quintana Roo",
+      "value": 98.312,
+      "robust_z": -7.8
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2026,
+      "territory": "Tamaulipas",
+      "value": 98.841,
+      "robust_z": -5.1
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2027,
+      "territory": "Baja California",
+      "value": 97.463,
+      "robust_z": -12.0
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2027,
+      "territory": "Baja California Sur",
+      "value": 98.67,
+      "robust_z": -6.0
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2027,
+      "territory": "Colima",
+      "value": 96.19,
+      "robust_z": -18.4
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2027,
+      "territory": "Quintana Roo",
+      "value": 98.312,
+      "robust_z": -7.8
+    },
+    {
+      "variable": "g_groundwater_ordinance_area",
+      "year": 2027,
+      "territory": "Tamaulipas",
+      "value": 98.841,
+      "robust_z": -5.1
+    },
+    {
+      "variable": "v_pop_density",
+      "year": 2020,
+      "territory": "Ciudad de México",
+      "value": 6786.6227,
+      "robust_z": 94.2
+    },
+    {
+      "variable": "v_pop_density",
+      "year": 2020,
+      "territory": "Estado de México",
+      "value": 789.7464,
+      "robust_z": 10.1
+    },
+    {
+      "variable": "v_pop_density",
+      "year": 2021,
+      "territory": "Ciudad de México",
+      "value": 6743.0317,
+      "robust_z": 92.3
+    },
+    {
+      "variable": "v_pop_density",
+      "year": 2021,
+      "territory": "Estado de México",
+      "value": 792.2325,
+      "robust_z": 10.0
+    },
+    {
+      "variable": "v_pop_density",
+      "year": 2022,
+      "territory": "Ciudad de México",
+      "value": 6717.5762,
+      "robust_z": 90.6
+    },
+    {
+      "variable": "v_pop_density",
+      "year": 2022,
+      "territory": "Estado de México",
+      "value": 796.2917,
+      "robust_z": 9.9
+    },
+    {
+      "variable": "v_pop_density",
+      "year": 2023,
+      "territory": "Ciudad de México",
+      "value": 6705.936,
+      "robust_z": 89.1
+    },
+    {
+      "variable": "v_pop_density",
+      "year": 2023,
+      "territory": "Estado de México",
+      "value": 801.862,
+      "robust_z": 9.8
+    },
+    {
+      "variable": "v_pop_density",
+      "year": 2024,
+      "territory": "Ciudad de México",
+      "value": 6693.1235,
+      "robust_z": 87.7
+    },
+    {
+      "variable": "v_pop_density",
+      "year": 2024,
+      "territory": "Estado de México",
+      "value": 807.1217,
+      "robust_z": 9.7
+    },
+    {
+      "variable": "v_pop_density",
+      "year": 2025,
+      "territory": "Ciudad de México",
+      "value": 6678.3178,
+      "robust_z": 86.3
+    },
+    {
+      "variable": "v_pop_density",
+      "year": 2025,
+      "territory": "Estado de México",
+      "value": 812.0313,
+      "robust_z": 9.6
+    },
+    {
+      "variable": "v_pop_density",
+      "year": 2026,
+      "territory": "Ciudad de México",
+      "value": 6661.0891,
+      "robust_z": 84.9
+    },
+    {
+      "variable": "v_pop_density",
+      "year": 2026,
+      "territory": "Estado de México",
+      "value": 816.5786,
+      "robust_z": 9.6
+    },
+    {
+      "variable": "v_pop_density",
+      "year": 2027,
+      "territory": "Ciudad de México",
+      "value": 6641.2861,
+      "robust_z": 83.6
+    },
+    {
+      "variable": "v_pop_density",
+      "year": 2027,
+      "territory": "Estado de México",
+      "value": 820.7785,
+      "robust_z": 9.5
+    },
+    {
+      "variable": "w_aquifer_deficit_volume_pc",
+      "year": 2023,
+      "territory": "Chihuahua",
+      "value": 775.86,
+      "robust_z": 14.8
+    },
+    {
+      "variable": "w_aquifer_deficit_volume_pc",
+      "year": 2024,
+      "territory": "Chihuahua",
+      "value": 766.431,
+      "robust_z": 14.7
+    },
+    {
+      "variable": "w_aquifer_deficit_volume_pc",
+      "year": 2025,
+      "territory": "Chihuahua",
+      "value": 757.593,
+      "robust_z": 14.6
+    },
+    {
+      "variable": "w_aquifer_deficit_volume_pc",
+      "year": 2026,
+      "territory": "Chihuahua",
+      "value": 749.404,
+      "robust_z": 14.6
+    },
+    {
+      "variable": "w_aquifer_deficit_volume_pc",
+      "year": 2027,
+      "territory": "Chihuahua",
+      "value": 741.861,
+      "robust_z": 14.5
+    },
+    {
+      "variable": "w_drought_intensity",
+      "year": 2025,
+      "territory": "Baja California",
+      "value": 38.393,
+      "robust_z": 10.0
+    },
+    {
+      "variable": "w_drought_intensity",
+      "year": 2025,
+      "territory": "Coahuila",
+      "value": 27.988,
+      "robust_z": 7.1
+    },
+    {
+      "variable": "w_drought_intensity",
+      "year": 2025,
+      "territory": "Chihuahua",
+      "value": 44.154,
+      "robust_z": 11.6
+    },
+    {
+      "variable": "w_drought_intensity",
+      "year": 2025,
+      "territory": "Durango",
+      "value": 24.653,
+      "robust_z": 6.2
+    },
+    {
+      "variable": "w_drought_intensity",
+      "year": 2025,
+      "territory": "Sinaloa",
+      "value": 41.354,
+      "robust_z": 10.8
+    },
+    {
+      "variable": "w_drought_intensity",
+      "year": 2025,
+      "territory": "Sonora",
+      "value": 53.053,
+      "robust_z": 14.1
+    },
+    {
+      "variable": "w_drought_intensity",
+      "year": 2026,
+      "territory": "Coahuila",
+      "value": 16.331,
+      "robust_z": 13.3
+    },
+    {
+      "variable": "w_drought_intensity",
+      "year": 2026,
+      "territory": "Tamaulipas",
+      "value": 10.123,
+      "robust_z": 8.0
+    },
+    {
+      "variable": "w_drought_share",
+      "year": 2026,
+      "territory": "Coahuila",
+      "value": 31.734,
+      "robust_z": 6.5
+    }
+  ]
+}

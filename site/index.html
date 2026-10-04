@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Water, energy, digital infrastructure and environmental pressure in Mexico, 2020–2027. A reproducible research observatory.">
+<title>DIRG Observatory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap">
+<link rel="stylesheet" href="assets/css/observatory.css">
+</head>
+<body>
+<a class="skip" href="#explorer">Skip to the observatory</a>
+<header class="topbar">
+  <a class="brand" href="#observatory" aria-label="DIRG Observatory, home">
+    <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12.5"/><ellipse cx="16" cy="16" rx="5.5" ry="12.5"/><path d="M3.5 16h25M6 9.5h20M6 22.5h20"/></svg>
+    <span class="brand-name">DIRG<span class="brand-sep">/</span><span class="brand-long">Observatory</span></span>
+  </a>
+  <nav class="nav" aria-label="Sections">
+    <a href="#observatory" data-i18n="nav.explore">Observatory</a>
+    <a href="#story" data-i18n="nav.story">Research</a>
+    <a href="#method" data-i18n="nav.method">Method</a>
+    <a href="#sources" data-i18n="nav.sources">Sources</a>
+    <a href="#quality" data-i18n="nav.quality">Quality</a>
+  </nav>
+  <div class="top-tools">
+    <button class="tool" id="motion-toggle" type="button" aria-pressed="false"><span class="tool-dot" aria-hidden="true"></span><span data-i18n="motion_pause">Pause motion</span></button>
+    <button class="tool" id="lang-toggle" type="button" lang="es">ES</button>
+  </div>
+</header>
+
+<main>
+<section class="stage" id="observatory" aria-labelledby="stage-title">
+  <canvas id="globe" role="img" aria-label="Rotating orthographic globe centred on Mexico, coloured by the selected layer. Use the state list or the table view for the same information as text."></canvas>
+  <div class="stage-grid" aria-hidden="true"></div>
+
+  <div class="stage-copy">
+    <p class="eyebrow mono" data-i18n="eyebrow">Mexico · 32 states · 2020–2027</p>
+    <h1 id="stage-title" class="thesis">
+      <span data-i18n="title_a">Digital infrastructure</span>
+      <span class="times" aria-hidden="true">×</span>
+      <span data-i18n="title_b">Resource governance</span>
+    </h1>
+    <p class="strands mono" id="strands">Water · Energy · Infrastructure · Territory</p>
+    <p class="lede" data-i18n="lede"></p>
+    <button class="cta" id="explore-btn" type="button"><span data-i18n="explore_cta">Explore the observatory</span> <span aria-hidden="true">→</span></button>
+  </div>
+
+  <div class="explorer" id="explorer">
+    <div class="controls">
+      <div class="modes" role="tablist" aria-label="Map layer" id="modes"></div>
+      <p class="mode-hint" id="mode-hint"></p>
+      <div class="subs" id="subs" role="group" aria-label="Variable"></div>
+      <div class="control-row">
+        <label class="select-wrap"><span class="sr" data-i18n="territory_select">Go to a state</span>
+          <select id="territory-select"><option value="" data-i18n="territory_select">Go to a state</option></select>
+        </label>
+        <button class="tool" id="table-toggle" type="button" data-i18n="table_toggle">View as table</button>
+      </div>
+    </div>
+
+    <div class="legend" id="legend" aria-live="polite"></div>
+
+    <div class="timeline" id="timeline">
+      <button class="play" id="play" type="button" aria-label="Play"><svg viewBox="0 0 16 16" aria-hidden="true"><path id="play-icon" d="M4 2.5v11l9-5.5z"/></svg></button>
+      <div class="years" id="years" role="radiogroup" aria-label="Year"></div>
+    </div>
+
+    <p class="hint mono" id="hover-hint" data-i18n="hover_hint">Drag to rotate · scroll or pinch to zoom · click a state</p>
+    <div class="tooltip" id="tooltip" role="status" hidden></div>
+
+    <div class="panel" id="panel" role="region" aria-label="Territory details" tabindex="-1">
+      <button class="sheet-handle" id="sheet-handle" type="button" aria-label="Expand panel"><span></span></button>
+      <div id="panel-body"></div>
+    </div>
+  </div>
+</section>
+
+<section class="table-view" id="table-view" hidden aria-label="Current layer as a table">
+  <div class="wrap">
+    <div class="table-head"><h2 id="table-title"></h2><button class="tool" id="table-close" type="button" data-i18n="table_close">Close table</button></div>
+    <div class="scroll-x"><table class="data-table" id="data-table"></table></div>
+  </div>
+</section>
+
+<section class="story" id="story" aria-label="Research narrative">
+  <div class="wrap" id="story-body"></div>
+</section>
+
+<section class="method" id="method" aria-labelledby="method-title">
+  <div class="wrap">
+    <p class="section-label mono">Method</p>
+    <h2 id="method-title" class="section-title">Methodology</h2>
+    <div class="formula" aria-label="SRTI formula">
+      <div class="formula-main">T<sub>it</sub> = w<sub>W</sub>·W<sub>it</sub> + w<sub>E</sub>·E<sub>it</sub> + w<sub>D</sub>·D<sub>it</sub> + w<sub>V</sub>·V<sub>it</sub></div>
+      <div class="formula-note mono">baseline w = 0.25 · pooled min–max 2020–2025 · ≥ 3 pillars · missing ≠ 0</div>
+    </div>
+    <dl class="method-grid" id="method-grid"></dl>
+    <div class="sens" id="sens"></div>
+    <p class="doc-links"><a href="docs/METHODOLOGY.md" data-i18n="full_method">Full methodology (Markdown)</a> · <a href="docs/DATA_DICTIONARY.md">DATA_DICTIONARY.md</a> · <a href="docs/DATA_GOVERNANCE_AUDIT.md">DATA_GOVERNANCE_AUDIT.md</a> · <a href="docs/LEGAL_LAYER.md">LEGAL_LAYER.md</a></p>
+  </div>
+</section>
+
+<section class="sources" id="sources" aria-labelledby="sources-title">
+  <div class="wrap">
+    <p class="section-label mono">Provenance</p>
+    <h2 id="sources-title" class="section-title">Source registry</h2>
+    <div class="scroll-x"><table class="data-table src-table" id="src-table"></table></div>
+    <h3 class="sub-title" data-i18n="register_title">Documented cloud regions</h3>
+    <div class="scroll-x"><table class="data-table" id="reg-table"></table></div>
+    <h3 class="sub-title" data-i18n="federal_framework">Federal framework</h3>
+    <div class="gov-list" id="gov-list"></div>
+  </div>
+</section>
+
+<section class="quality" id="quality" aria-labelledby="quality-title">
+  <div class="wrap">
+    <p class="section-label mono">Quality assurance</p>
+    <h2 id="quality-title" class="section-title">Data quality</h2>
+    <pre class="qa-block mono" id="qa-block">DATA QUALITY
+────────────
+Observations: 4,352
+Territories:  32
+Years:        2020–2027
+
+Complete:     64.1%
+Partial:      28.1%
+Missing:      7.8%
+
+Checks:       30 pass · 0 warn · 0 fail
+Last validation: 2026-10-04</pre>
+    <details class="qa-details"><summary>All checks</summary><div class="scroll-x"><table class="data-table" id="qa-table"></table></div></details>
+    <p class="doc-links"><a href="downloads/QUALITY_REPORT.md" data-i18n="quality_full">Full quality report</a> · <span data-i18n="downloads">Download the public dataset</span>: <a href="downloads/observations.csv">observations.csv</a> · <a href="downloads/index_results.csv">index_results.csv</a> · <a href="downloads/coverage.csv">coverage.csv</a> · <a href="downloads/variables.csv">variables.csv</a> · <a href="downloads/sources.csv">sources.csv</a></p>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <p class="disclaimer" data-i18n="disclaimer"></p>
+    <div>
+      <p class="section-label mono" data-i18n="citation_title">Cite</p>
+      <p class="cite mono">Aranda Medrano, L. P. (2026). Digital Infrastructure &amp; Resource Governance Observatory (v0.1.0) [Data set and software]. Data as of 2026-10-04.</p>
+      <p class="small" data-i18n="license_line"></p>
+    </div>
+  </div>
+</footer>
+<noscript><p class="noscript">The interactive observatory needs JavaScript. The full dataset is available as CSV in /downloads and the methodology in /docs.</p></noscript>
+<script src="assets/vendor/d3.v7.9.0.min.js"></script>
+<script src="assets/vendor/topojson-client.v3.1.0.min.js"></script>
+<script src="assets/js/observatory.js"></script>
+</body>
+</html>

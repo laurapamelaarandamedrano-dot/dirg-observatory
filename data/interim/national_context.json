@@ -1,0 +1,58 @@
+{
+  "variable": "national_final_electricity_consumption",
+  "unit": "TWh",
+  "source_id": "S11",
+  "epistemic_status": "administrative",
+  "series": [
+    {
+      "year": 2016,
+      "value": 246.72,
+      "complete": true
+    },
+    {
+      "year": 2017,
+      "value": 259.48,
+      "complete": true
+    },
+    {
+      "year": 2018,
+      "value": 270.39,
+      "complete": true
+    },
+    {
+      "year": 2019,
+      "value": 275.96,
+      "complete": true
+    },
+    {
+      "year": 2020,
+      "value": 268.17,
+      "complete": true
+    },
+    {
+      "year": 2021,
+      "value": 278.64,
+      "complete": true
+    },
+    {
+      "year": 2022,
+      "value": 289.91,
+      "complete": true
+    },
+    {
+      "year": 2023,
+      "value": 300.48,
+      "complete": true
+    },
+    {
+      "year": 2024,
+      "value": 305.74,
+      "complete": true
+    },
+    {
+      "year": 2025,
+      "value": 306.48,
+      "complete": true
+    }
+  ]
+}

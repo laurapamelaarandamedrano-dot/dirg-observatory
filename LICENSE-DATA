@@ -1,0 +1,10 @@
+Derived data in data/public/, data/processed/ and site/data/ are licensed under the
+Creative Commons Attribution 4.0 International License (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/
+
+Attribution: Aranda Medrano, L. P. (2026). Digital Infrastructure & Resource Governance Observatory.
+
+Source data remain under their own terms (see docs/SOURCES.md and data/public/sources.csv).
+Most official inputs are CC BY 4.0 via datos.gob.mx; attribution to CONAGUA, SMN, CONAPO, CNE,
+INECC and CFE is required when reusing values derived from them. Documentary web sources are cited,
+not redistributed. Natural Earth data are in the public domain.

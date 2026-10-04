@@ -1,0 +1,10 @@
+# Raw source files are fetched by script and verified against data/raw/MANIFEST.csv.
+data/raw/*
+!data/raw/MANIFEST.csv
+!data/raw/README.md
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+dist/
+.DS_Store

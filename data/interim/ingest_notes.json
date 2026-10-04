@@ -1,0 +1,74 @@
+[
+  {
+    "source": "S01",
+    "code": "INFO_MAPS",
+    "detail": "435 drought maps, 2478 municipalities, last map 2026-09-15",
+    "count": null
+  },
+  {
+    "source": "S03",
+    "code": "INFO_AQUIFERS",
+    "detail": "653 aquifers; 286 with negative availability",
+    "count": null
+  },
+  {
+    "source": "S07",
+    "code": "UNMATCHED_STATE",
+    "detail": "permits without a recognisable state (e.g. 'PERMISO RENUNCIADO', 'sin dato'); excluded: ['PERMISO RENUNCIADO', 'Texas', 'sin dato']",
+    "count": 161
+  },
+  {
+    "source": "S07",
+    "code": "EXCLUDED_IMPORT_EXPORT",
+    "detail": "import/export permits excluded",
+    "count": 77
+  },
+  {
+    "source": "S07",
+    "code": "MISSING_CAPACITY",
+    "detail": "permits with no authorized capacity; excluded",
+    "count": 4
+  },
+  {
+    "source": "S07",
+    "code": "IMPOSSIBLE_VALUE",
+    "detail": "authorized capacity > 5,000 MW for a single permit (max 3,304,269 MW); excluded as data-entry error",
+    "count": 12
+  },
+  {
+    "source": "S07",
+    "code": "SUSPECT_UNIT",
+    "detail": "permits > 100 MW whose estimated annual generation implies a capacity factor < 0.2% (likely kW recorded as MW); excluded",
+    "count": 16
+  },
+  {
+    "source": "S07",
+    "code": "OP_DATE_IMPUTED",
+    "detail": "ended permits without an operation date: grant date used as start (flagged)",
+    "count": 1091
+  },
+  {
+    "source": "S07",
+    "code": "ENDED_WITHOUT_DATE",
+    "detail": "permits marked ended but with no end date; excluded from all years",
+    "count": 99
+  },
+  {
+    "source": "S07",
+    "code": "INFO_PERMITS",
+    "detail": "2545 permits in file; 2176 usable after exclusions",
+    "count": null
+  },
+  {
+    "source": "S09",
+    "code": "INFO_MUNICIPALITIES",
+    "detail": "2463 municipalities; rows with any missing component: 0",
+    "count": null
+  },
+  {
+    "source": "S10",
+    "code": "NO_PUBLICATION_YEAR",
+    "detail": "available instruments without publication year; not counted",
+    "count": 35
+  }
+]

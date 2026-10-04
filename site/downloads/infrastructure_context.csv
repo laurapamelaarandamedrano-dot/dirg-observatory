@@ -1,0 +1,2 @@
+context_id,cve_ent,variable,value,unit,reference_date,epistemic_status,source_id,use,notes
+IC-001,22,dc_operating_capacity_reported,186,MW,2025-05,documentary,S28,context_only,"Trade-press figure without a named primary source. Never enters the index."

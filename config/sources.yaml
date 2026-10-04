@@ -1,0 +1,493 @@
+# Source registry. Single source of truth for provenance.
+# Every dataset enters this file BEFORE any of its data enters the pipeline.
+# `redistribution`:
+#   raw_ok        -> raw file may be redistributed (still kept out of git; fetched by manifest)
+#   derived_only  -> only aggregated/derived values are published
+#   metadata_only -> only citation + transformation notes are published
+# `fetch.url` is the official endpoint used by `src/ingest.py`.
+# `access_date` is when the bytes in data/raw were obtained for this release.
+
+registry_version: "0.1.0"
+
+sources:
+
+  - id: S01
+    key: smn_drought
+    institution: "Servicio Meteorológico Nacional (SMN), Comisión Nacional del Agua (CONAGUA)"
+    title: "Monitor de Sequía de México: municipios con sequía (archivo histórico municipal)"
+    url_landing: "https://smn.conagua.gob.mx/es/climatologia/monitor-de-sequia/monitor-de-sequia-en-mexico"
+    fetch:
+      url: "https://smn.conagua.gob.mx/tools/RESOURCES/Monitor%20de%20Sequia%20en%20Mexico/MunicipiosSequia.xlsx"
+      file: smn_MunicipiosSequia.xlsx
+    publication_date: "2026-09-21"   # HTTP Last-Modified of the file at access
+    access_date: "2026-10-04"
+    license: "Public government information (gob.mx). Specific terms not stated on the file; treated as derived_only pending confirmation."
+    dataset_type: administrative
+    geographic_coverage: "Mexico, 2,4xx municipalities"
+    temporal_coverage: "2003-01 to 2026-09-15 (monthly, biweekly since 2014)"
+    redistribution: derived_only
+    notes: "Categories D0 (abnormally dry) to D4 (exceptional drought). Blank cells mean no drought category assigned."
+
+  - id: S02
+    key: conapo_indicators
+    institution: "Consejo Nacional de Población (CONAPO)"
+    title: "Conciliación Demográfica 1950-2019 y Proyecciones de la Población de México y de las Entidades Federativas 2020-2070: indicadores demográficos"
+    url_landing: "https://www.datos.gob.mx/dataset/proyecciones-de-poblacion"
+    fetch:
+      url: "https://www.datos.gob.mx/dataset/f2b9b220-3ef7-4e3a-bde6-87e1dac78c6a/resource/b4fe49a8-c86a-4c32-8450-8f3c4cc83125/download/05_indicadores_demograficos_proyecciones.csv"
+      file: conapo_indicadores.csv
+    publication_date: "2023"
+    access_date: "2026-10-04"
+    license: "CC BY 4.0 (datos.gob.mx)"
+    dataset_type: modelled
+    geographic_coverage: "National and 32 states"
+    temporal_coverage: "1950-2070 (1950-2019 conciliation; 2020-2070 projections)"
+    redistribution: raw_ok
+    notes: "Values for 2020 onward are projections calibrated to the 2020 Census; they are coded as `modelled`."
+
+  - id: S03
+    key: conagua_availability
+    institution: "Comisión Nacional del Agua (CONAGUA)"
+    title: "Disponibilidad de agua subterránea (653 acuíferos), publicación 2023"
+    url_landing: "https://www.datos.gob.mx/dataset/aguas_subterraneas"
+    fetch:
+      url: "https://repodatos.atdt.gob.mx/api_update/conagua/aguas_subterraneas/disponibilidad_agua_subterranea.zip"
+      file: conagua_disponibilidad.zip
+    publication_date: "2023"
+    access_date: "2026-10-04"
+    license: "CC BY 4.0 (datos.gob.mx)"
+    dataset_type: administrative
+    geographic_coverage: "653 aquifers, each assigned to one state by CONAGUA (CLV_EDO)"
+    temporal_coverage: "Single vintage (2023 publication; file stem dated 09-11-2023)"
+    redistribution: raw_ok
+    notes: "Mean annual availability (DMA) computed under NOM-011-CONAGUA-2015. DMA_NEGATI < 0 means no availability (deficit)."
+
+  - id: S04
+    key: conagua_vedas
+    institution: "Comisión Nacional del Agua (CONAGUA)"
+    title: "Ordenamientos de aguas subterráneas: vedas"
+    url_landing: "https://www.datos.gob.mx/dataset/aguas_subterraneas"
+    fetch:
+      url: "https://repodatos.atdt.gob.mx/api_update/conagua/aguas_subterraneas/ordenamientos_asub_vedas.zip"
+      file: conagua_vedas.zip
+    publication_date: "2021-11-25"
+    access_date: "2026-10-04"
+    license: "CC BY 4.0 (datos.gob.mx)"
+    dataset_type: geospatial
+    geographic_coverage: "Polygons of groundwater vedas (prohibitions/restrictions) in force at file date"
+    temporal_coverage: "Decrees with DOF dates; geometry as of 2021-11-25"
+    redistribution: raw_ok
+    notes: "Descriptive regulatory layer. Not a legal assessment."
+
+  - id: S05
+    key: conagua_regulations
+    institution: "Comisión Nacional del Agua (CONAGUA)"
+    title: "Ordenamientos de aguas subterráneas: reglamentos y reservas de zonas reglamentadas"
+    url_landing: "https://www.datos.gob.mx/dataset/aguas_subterraneas"
+    fetch:
+      url: "https://repodatos.atdt.gob.mx/api_update/conagua/aguas_subterraneas/ordenamientos_asub_reglamentos_reservas_zonas_reglamentadas.zip"
+      file: conagua_reglamentos.zip
+    publication_date: "2023-01-13"
+    access_date: "2026-10-04"
+    license: "CC BY 4.0 (datos.gob.mx)"
+    dataset_type: geospatial
+    geographic_coverage: "11 regulated zones"
+    temporal_coverage: "As of 2023-01-13"
+    redistribution: raw_ok
+    notes: ""
+
+  - id: S06
+    key: conagua_suspension
+    institution: "Comisión Nacional del Agua (CONAGUA)"
+    title: "Ordenamientos de aguas subterráneas: acuerdo de suspensión provisional de libre alumbramiento"
+    url_landing: "https://www.datos.gob.mx/dataset/aguas_subterraneas"
+    fetch:
+      url: "https://repodatos.atdt.gob.mx/api_update/conagua/aguas_subterraneas/ordenamientos_asub_suspension_libre_alumbramiento.zip"
+      file: conagua_suspension.zip
+    publication_date: "2021-11-25"
+    access_date: "2026-10-04"
+    license: "CC BY 4.0 (datos.gob.mx)"
+    dataset_type: geospatial
+    geographic_coverage: "Aquifers covered by suspension agreements"
+    temporal_coverage: "As of 2021-11-25"
+    redistribution: raw_ok
+    notes: ""
+
+  - id: S07
+    key: cne_generation_permits
+    institution: "Comisión Nacional de Energía (CNE)"
+    title: "Lista de permisos otorgados de generación de energía eléctrica: histórico (1963 - febrero de 2026)"
+    url_landing: "https://www.datos.gob.mx/dataset/electricidad"
+    fetch:
+      url: "https://repodatos.atdt.gob.mx/api_update/cne/electricidad/ue_per_gen_hist_feb26.csv"
+      file: cne_permisos_gen_hist.csv
+    publication_date: "2026-04-20"
+    access_date: "2026-10-04"
+    license: "CC BY 4.0 (datos.gob.mx)"
+    dataset_type: administrative
+    geographic_coverage: "Permits by state and municipality"
+    temporal_coverage: "1963 to 2026-02"
+    redistribution: derived_only
+    notes: "Raw file names permit holders and lists street addresses with coordinates. The observatory publishes ONLY state-year aggregates of authorized capacity; holder names, addresses and coordinates are dropped at ingestion (see DATA_GOVERNANCE_AUDIT.md). Authorized capacity is not equal to installed or dispatched capacity."
+
+  - id: S08
+    key: conapo_marginalization
+    institution: "Consejo Nacional de Población (CONAPO)"
+    title: "Índice de marginación por entidad federativa 2020"
+    url_landing: "https://www.datos.gob.mx/dataset/indices_marginacion"
+    fetch:
+      url: "https://www.datos.gob.mx/dataset/d8f2a534-bcee-4114-853d-82982a81ce24/resource/d217f9aa-70e5-4176-b00b-3a92b7541a1e/download/ime_2020.csv"
+      file: conapo_ime_2020.csv
+    publication_date: "2021"
+    access_date: "2026-10-04"
+    license: "CC BY 4.0 (datos.gob.mx)"
+    dataset_type: derived
+    geographic_coverage: "32 states"
+    temporal_coverage: "2020 (Census 2020 based)"
+    redistribution: raw_ok
+    notes: "IMN_2020 is CONAPO's normalized marginalization index (0-1 scale, higher = more marginalized)."
+
+  - id: S09
+    key: pronacose_vulnerability
+    institution: "Comisión Nacional del Agua (CONAGUA), Programa Nacional Contra la Sequía (PRONACOSE)"
+    title: "Vulnerabilidad social, económica y ambiental a la sequía por municipio"
+    url_landing: "https://www.datos.gob.mx/dataset/programa_nacional_contra_sequia_pronacose"
+    fetch:
+      url: "https://repodatos.atdt.gob.mx/api_update/conagua/programa_nacional_contra_sequia_pronacose/"
+      files:
+        - vulnerabilidad_social_municipal.csv -> pronacose_vuln_social.csv
+        - vulnerabilidad_economica_municipal.csv -> pronacose_vuln_economica.csv
+        - vulnerabilidad_ambiental_municipal.csv -> pronacose_vuln_ambiental.csv
+    publication_date: "undated"
+    access_date: "2026-10-04"
+    license: "CC BY 4.0 (datos.gob.mx)"
+    dataset_type: modelled
+    geographic_coverage: "Municipalities"
+    temporal_coverage: "Undated vintage; treated as time-invariant with a recency penalty"
+    redistribution: raw_ok
+    notes: "Probabilities (0-100) estimated by CONAGUA from indicator sets. The vintage year is not stated in the published resource; the observatory flags this as UNDATED_VINTAGE."
+
+  - id: S10
+    key: inecc_climate_instruments
+    institution: "Instituto Nacional de Ecología y Cambio Climático (INECC)"
+    title: "Instrumentos de Política Climática en México por Entidad Federativa (1975-2025)"
+    url_landing: "https://www.datos.gob.mx/dataset/instrumentos_politica_climatica_mexico_entidad_federativa"
+    fetch:
+      url: "https://repodatos.atdt.gob.mx/api_update/inecc/instrumentos_politica_climatica_mexico_entidad_federativa/instrumentos_inecc.csv"
+      file: inecc_instrumentos.csv
+    publication_date: "2025"
+    access_date: "2026-10-04"
+    license: "CC BY 4.0 (datos.gob.mx)"
+    dataset_type: documentary
+    geographic_coverage: "32 states"
+    temporal_coverage: "Instruments published 1975-2025"
+    redistribution: raw_ok
+    notes: "Governance layer only. Counts of instruments are descriptive and say nothing about their effectiveness."
+
+  - id: S11
+    key: cfe_national_consumption
+    institution: "Comisión Federal de Electricidad (CFE)"
+    title: "Consumo final de energía eléctrica (2016 a 2025)"
+    url_landing: "https://www.datos.gob.mx/dataset/consumo_final_energia_electrica"
+    fetch:
+      url: "https://repodatos.atdt.gob.mx/api_update/cfe/consumo_final_energia_electrica/consumo_final_energia_electrica.csv"
+      file: cfe_consumo_final.csv
+    publication_date: "2026-03-13"
+    access_date: "2026-10-04"
+    license: "CC BY 4.0 (datos.gob.mx)"
+    dataset_type: administrative
+    geographic_coverage: "National only"
+    temporal_coverage: "2016-01 to 2025-12, monthly"
+    redistribution: raw_ok
+    notes: "National context series. NOT territorial: it cannot enter the state-level index."
+
+  - id: S12
+    key: naturalearth_admin1
+    institution: "Natural Earth"
+    title: "Admin 1 – States, Provinces (1:10m), v5"
+    url_landing: "https://www.naturalearthdata.com/"
+    fetch:
+      url: "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_1_states_provinces.geojson"
+      file: ne_10m_admin_1_states_provinces.geojson
+    publication_date: "2022"
+    access_date: "2026-10-04"
+    license: "Public domain"
+    dataset_type: geospatial
+    geographic_coverage: "World; filtered to the 32 Mexican states"
+    temporal_coverage: "Static"
+    redistribution: raw_ok
+    notes: "Used for display geometry and state areas. Official analytical boundaries are INEGI's Marco Geoestadístico; NE boundaries are generalized. Areas computed from NE are approximate (see METHODOLOGY)."
+
+  - id: S13
+    key: worldatlas_land
+    institution: "world-atlas (M. Bostock), derived from Natural Earth"
+    title: "land-110m.json v2.0.2"
+    url_landing: "https://github.com/topojson/world-atlas"
+    fetch:
+      url: "https://registry.npmjs.org/world-atlas/-/world-atlas-2.0.2.tgz"
+      file: world_land_110m.topo.json
+    publication_date: "2020"
+    access_date: "2026-10-04"
+    license: "ISC (data: Natural Earth, public domain)"
+    dataset_type: geospatial
+    geographic_coverage: "World land"
+    temporal_coverage: "Static"
+    redistribution: raw_ok
+    notes: "Globe basemap only."
+
+  # ---- Documentary sources for the digital-infrastructure register ----
+  - id: S20
+    key: doc_oracle_qro
+    institution: "Oracle Cloud Infrastructure documentation"
+    title: "Release note: New region in Queretaro, Mexico (mx-queretaro-1)"
+    url_landing: "https://docs.oracle.com/en-us/iaas/releasenotes/changes/75aca8c4-b80f-4892-bc5c-b6748ec4b5d7/index.htm"
+    publication_date: "2022-07-15"
+    access_date: "2026-10-04"
+    license: "Copyrighted web page; facts cited, text not reproduced"
+    dataset_type: documentary
+    geographic_coverage: "Querétaro"
+    temporal_coverage: "2022"
+    redistribution: metadata_only
+    notes: "Primary (provider) source."
+
+  - id: S21
+    key: doc_oracle_mty
+    institution: "Oracle Cloud Infrastructure documentation"
+    title: "Release note: New region in Monterrey, Mexico (mx-monterrey-1)"
+    url_landing: "https://docs.oracle.com/en-us/iaas/releasenotes/changes/b2b79dfd-1a85-4a96-841a-6686b8e0f78f/"
+    publication_date: "2023-07-13"
+    access_date: "2026-10-04"
+    license: "Copyrighted web page; facts cited, text not reproduced"
+    dataset_type: documentary
+    geographic_coverage: "Nuevo León"
+    temporal_coverage: "2023"
+    redistribution: metadata_only
+    notes: "Primary (provider) source."
+
+  - id: S22
+    key: doc_azure_mx
+    institution: "Mexico Business News"
+    title: "Microsoft Launches First Cloud Data Center in Mexico"
+    url_landing: "https://mexicobusiness.news/cloudanddata/news/microsoft-launches-first-cloud-data-center-mexico"
+    publication_date: "2024-05-08"
+    access_date: "2026-10-04"
+    license: "Copyrighted web page; facts cited, text not reproduced"
+    dataset_type: documentary
+    geographic_coverage: "Querétaro metropolitan area"
+    temporal_coverage: "2024"
+    redistribution: metadata_only
+    notes: "Secondary source (press)."
+
+  - id: S23
+    key: doc_gcp_qro
+    institution: "DatacenterDynamics"
+    title: "Google launches Mexican cloud region in Querétaro"
+    url_landing: "https://www.datacenterdynamics.com/en/news/google-launches-mexican-cloud-region-in-queretaro/"
+    publication_date: "2024-12-07"
+    access_date: "2026-10-04"
+    license: "Copyrighted web page; facts cited, text not reproduced"
+    dataset_type: documentary
+    geographic_coverage: "Querétaro"
+    temporal_coverage: "2024"
+    redistribution: metadata_only
+    notes: "Secondary source (trade press)."
+
+  - id: S24
+    key: doc_aws_mx
+    institution: "Amazon Web Services News Blog"
+    title: "Now open – AWS Mexico (Central) Region (mx-central-1)"
+    url_landing: "https://aws.amazon.com/blogs/aws/now-open-aws-mexico-central-region"
+    publication_date: "2025-01-14"
+    access_date: "2026-10-04"
+    license: "Copyrighted web page; facts cited, text not reproduced"
+    dataset_type: documentary
+    geographic_coverage: "Mexico (Central)"
+    temporal_coverage: "2025"
+    redistribution: metadata_only
+    notes: "Primary source does not name the state. State attribution (Querétaro) relies on S25."
+
+  - id: S25
+    key: doc_aws_mx_location
+    institution: "Amazon (press release)"
+    title: "AWS to launch an infrastructure region in Mexico"
+    url_landing: "https://press.aboutamazon.com/2024/2/aws-to-launch-an-infrastructure-region-in-mexico"
+    publication_date: "2024-02-25"
+    access_date: "2026-10-04"
+    license: "Copyrighted web page; facts cited, text not reproduced"
+    dataset_type: documentary
+    geographic_coverage: "Querétaro"
+    temporal_coverage: "2024"
+    redistribution: metadata_only
+    notes: "Location attribution for S24; confidence recorded as `secondary` in the register."
+
+  - id: S26
+    key: doc_alibaba_mx
+    institution: "DatacenterDynamics"
+    title: "Alibaba Cloud launches Mexico cloud region"
+    url_landing: "https://www.datacenterdynamics.com/en/news/alibaba-cloud-launches-mexico-cloud-region/"
+    publication_date: "2025-02-19"
+    access_date: "2026-10-04"
+    license: "Copyrighted web page; facts cited, text not reproduced"
+    dataset_type: documentary
+    geographic_coverage: "Querétaro"
+    temporal_coverage: "2025"
+    redistribution: metadata_only
+    notes: "Secondary source (trade press)."
+
+  - id: S27
+    key: doc_huawei_mx
+    institution: "Xataka México; Mexico Business News"
+    title: "Huawei cloud data centres in Estado de México (first opened 2019; second region 2021)"
+    url_landing: "https://www.xataka.com.mx/telecomunicaciones/huawei-no-solo-smartphones-empresa-apuesta-mexico-nube-abrira-su-segundo-centro-datos-tultitlan-edomex"
+    url_secondary: "https://mexicobusiness.news/tech/news/huawei-opens-second-cloud-region"
+    publication_date: "2021-10-26"
+    access_date: "2026-10-04"
+    license: "Copyrighted web page; facts cited, text not reproduced"
+    dataset_type: documentary
+    geographic_coverage: "Estado de México"
+    temporal_coverage: "2019-2021"
+    redistribution: metadata_only
+    notes: "Secondary sources; opening years are reported at year precision only."
+
+  - id: S28
+    key: doc_dcd_queretaro_capacity
+    institution: "DatacenterDynamics (Spanish edition)"
+    title: "El boom de data centers en Querétaro; acapara el 79% nacional"
+    url_landing: "https://www.datacenterdynamics.com/es/noticias/el-boom-de-data-centers-en-quer%C3%A9taro-acapara-el-79-nacional/"
+    publication_date: "2026-02-12"
+    access_date: "2026-10-04"
+    license: "Copyrighted web page; facts cited, text not reproduced"
+    dataset_type: documentary
+    geographic_coverage: "Querétaro"
+    temporal_coverage: "May 2025"
+    redistribution: metadata_only
+    notes: "Reports 186 MW operating in Querétaro as of May 2025 (~79% of national). The article does not attribute the figure to a named primary source; kept as CONTEXT ONLY, never in the index."
+
+  # ---- Legal sources (documentary governance layer) ----
+  - id: S40
+    key: legal_cpeum
+    institution: "Cámara de Diputados del H. Congreso de la Unión"
+    title: "Constitución Política de los Estados Unidos Mexicanos (texto vigente)"
+    url_landing: "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+    publication_date: "1917-02-05 (last reform varies)"
+    access_date: "2026-10-04"
+    license: "Official legal text (public)"
+    dataset_type: documentary
+    geographic_coverage: "Federal"
+    temporal_coverage: "In force"
+    redistribution: metadata_only
+    notes: ""
+
+  - id: S41
+    key: legal_water_2025
+    institution: "Diario Oficial de la Federación; Holland & Knight (summary)"
+    title: "Ley General de Aguas and reform decree of the Ley de Aguas Nacionales"
+    url_landing: "https://www.hklaw.com/es/insights/publications/2025/12/mexico-aprueba-la-nueva-ley-general-de-aguas-y-reformas"
+    url_secondary: "https://www.supremacorte.gob.mx/sites/default/files/sintesis_dof_gocdmx/documento/2026-01/DOF%2011122025%20S%C3%8DNTESIS.pdf"
+    publication_date: "2025-12-11"
+    access_date: "2026-10-04"
+    license: "Official legal text (public); law-firm summary cited, not reproduced"
+    dataset_type: documentary
+    geographic_coverage: "Federal"
+    temporal_coverage: "From 2025-12"
+    redistribution: metadata_only
+    notes: "DOF date taken from the SCJN DOF synthesis of 2025-12-11. Requires verification against the DOF edition before formal legal citation."
+
+  - id: S42
+    key: legal_energy_2025
+    institution: "Diario Oficial de la Federación; White & Case (summary)"
+    title: "Ley del Sector Eléctrico; Ley de la Comisión Nacional de Energía; Ley de Planeación y Transición Energética (DOF 2025-03-18)"
+    url_landing: "https://whitecase.com/sites/default/files/2025-03/nuevas-leyes-en-materia-de-energia-esp.pdf"
+    publication_date: "2025-03-18"
+    access_date: "2026-10-04"
+    license: "Official legal text (public); law-firm summary cited, not reproduced"
+    dataset_type: documentary
+    geographic_coverage: "Federal"
+    temporal_coverage: "From 2025-03"
+    redistribution: metadata_only
+    notes: "Abrogated Ley de la Industria Eléctrica and Ley de Transición Energética; CNE replaced CRE."
+
+  - id: S43
+    key: legal_telecom_2025
+    institution: "Diario Oficial de la Federación; IDC Online (summary)"
+    title: "Ley en Materia de Telecomunicaciones y Radiodifusión (DOF 2025-07-16)"
+    url_landing: "https://www.diputados.gob.mx/LeyesBiblio/pdf/LMTR.pdf"
+    url_secondary: "https://idconline.mx/corporativo/2025/07/24/nueva-ley-de-telecomunicaciones-y-radiodifusion-claves"
+    publication_date: "2025-07-16"
+    access_date: "2026-10-04"
+    license: "Official legal text (public)"
+    dataset_type: documentary
+    geographic_coverage: "Federal"
+    temporal_coverage: "From 2025-07"
+    redistribution: metadata_only
+    notes: "Creates the Comisión Reguladora de Telecomunicaciones attached to the Agencia de Transformación Digital y Telecomunicaciones."
+
+  - id: S44
+    key: legal_lgeepa
+    institution: "Cámara de Diputados"
+    title: "Ley General del Equilibrio Ecológico y la Protección al Ambiente"
+    url_landing: "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGEEPA.pdf"
+    publication_date: "1988-01-28 (texto vigente)"
+    access_date: "2026-10-04"
+    license: "Official legal text (public)"
+    dataset_type: documentary
+    geographic_coverage: "Federal"
+    temporal_coverage: "In force"
+    redistribution: metadata_only
+    notes: ""
+
+  - id: S45
+    key: legal_lgahotdu
+    institution: "Cámara de Diputados"
+    title: "Ley General de Asentamientos Humanos, Ordenamiento Territorial y Desarrollo Urbano"
+    url_landing: "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGAHOTDU.pdf"
+    publication_date: "2016-11-28 (texto vigente)"
+    access_date: "2026-10-04"
+    license: "Official legal text (public)"
+    dataset_type: documentary
+    geographic_coverage: "Federal"
+    temporal_coverage: "In force"
+    redistribution: metadata_only
+    notes: ""
+
+  - id: S46
+    key: legal_nom011
+    institution: "CONAGUA / DOF"
+    title: "NOM-011-CONAGUA-2015, Conservación del recurso agua: especificaciones y método para determinar la disponibilidad media anual de las aguas nacionales"
+    url_landing: "https://www.dof.gob.mx/nota_detalle.php?codigo=5387027&fecha=27/03/2015"
+    publication_date: "2015-03-27"
+    access_date: "2026-10-04"
+    license: "Official legal text (public)"
+    dataset_type: documentary
+    geographic_coverage: "Federal"
+    temporal_coverage: "In force"
+    redistribution: metadata_only
+    notes: "Defines the method behind S03."
+
+  - id: S47
+    key: legal_lgcc
+    institution: "Cámara de Diputados"
+    title: "Ley General de Cambio Climático"
+    url_landing: "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGCC.pdf"
+    publication_date: "2012-06-06 (texto vigente)"
+    access_date: "2026-10-04"
+    license: "Official legal text (public)"
+    dataset_type: documentary
+    geographic_coverage: "Federal"
+    temporal_coverage: "In force"
+    redistribution: metadata_only
+    notes: ""
+
+  - id: S48
+    key: legal_lfd
+    institution: "Cámara de Diputados"
+    title: "Ley Federal de Derechos (zonas de disponibilidad para cuotas de agua)"
+    url_landing: "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFD.pdf"
+    publication_date: "1981-12-31 (texto vigente)"
+    access_date: "2026-10-04"
+    license: "Official legal text (public)"
+    dataset_type: documentary
+    geographic_coverage: "Federal"
+    temporal_coverage: "In force"
+    redistribution: metadata_only
+    notes: ""

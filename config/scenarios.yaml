@@ -1,0 +1,55 @@
+# Methodological parameters. Changing any value here changes the published results,
+# so every change must be recorded in CHANGELOG.md.
+
+years: [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027]
+reference_period: [2020, 2025]     # pooled normalization window (years with the most complete data)
+as_of_date: "2026-10-04"           # data cut-off for this release
+
+normalization:
+  method: minmax_pooled
+  winsorize: [0.02, 0.98]          # pooled quantiles over the reference period
+
+rules:
+  min_indicator_share_per_pillar: 0.5   # pillar computed only if >= 50% of its index indicators exist
+  min_pillars_for_composite: 3          # SRTI needs >= 3 of 4 pillars (weights renormalized, flagged)
+
+coverage:
+  status_weights:
+    observed: 1.0
+    administrative: 1.0
+    geospatial: 0.9
+    derived: 0.85
+    documentary: 0.7
+    estimated: 0.6
+    modelled: 0.5
+    hypothesized: 0.0
+    unknown: 0.0
+  recency:
+    grace_years: 1          # no penalty if the value's vintage is within 1 year of the target year
+    penalty_per_year: 0.15
+    floor: 0.4
+  partial_year_factor: 0.75
+  undated_vintage_factor: 0.7
+  tiers:                    # lower bounds, evaluated top-down
+    high: 0.75
+    moderate: 0.5
+    limited: 0.25
+    insufficient: 0.0
+  suppress_index_below: limited   # SRTI is NOT displayed for `insufficient`
+
+scenarios:
+  baseline:     {label: "Equal weights (baseline)", weights: {W: 0.25, E: 0.25, D: 0.25, V: 0.25}, aggregation: arithmetic, normalization: minmax_pooled}
+  water_heavy:  {label: "Water-heavy",  weights: {W: 0.40, E: 0.20, D: 0.20, V: 0.20}, aggregation: arithmetic, normalization: minmax_pooled}
+  energy_heavy: {label: "Energy-heavy", weights: {W: 0.20, E: 0.40, D: 0.20, V: 0.20}, aggregation: arithmetic, normalization: minmax_pooled}
+  digital_heavy: {label: "Digital-heavy", weights: {W: 0.20, E: 0.20, D: 0.40, V: 0.20}, aggregation: arithmetic, normalization: minmax_pooled}
+  vulnerability_heavy: {label: "Vulnerability-heavy", weights: {W: 0.20, E: 0.20, D: 0.20, V: 0.40}, aggregation: arithmetic, normalization: minmax_pooled}
+  rbi:          {label: "Resource Baseline Index (no digital pillar)", weights: {W: 0.3333, E: 0.3333, D: 0.0, V: 0.3334}, aggregation: arithmetic, normalization: minmax_pooled}
+  geometric:    {label: "Equal weights, geometric mean", weights: {W: 0.25, E: 0.25, D: 0.25, V: 0.25}, aggregation: geometric, normalization: minmax_pooled}
+  zscore:       {label: "Equal weights, z-score normalization", weights: {W: 0.25, E: 0.25, D: 0.25, V: 0.25}, aggregation: arithmetic, normalization: zscore_pooled}
+  percentile:   {label: "Equal weights, percentile normalization", weights: {W: 0.25, E: 0.25, D: 0.25, V: 0.25}, aggregation: arithmetic, normalization: percentile_pooled}
+
+monte_carlo:
+  draws: 2000
+  dirichlet_alpha: 4.0      # concentration around equal weights; alpha=1 would be uniform over the simplex
+  seed: 20261004
+  interval: [0.05, 0.95]
