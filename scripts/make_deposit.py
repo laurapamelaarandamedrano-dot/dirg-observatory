@@ -12,7 +12,7 @@ from src.build_site import VERSION  # noqa: E402
 FILES = sorted((ROOT / "data" / "public").glob("*.csv")) + [
     ROOT / "reports" / "QUALITY_REPORT.md", ROOT / "reports" / "production_audit.json", ROOT / "reports" / "quality_report.json",
     ROOT / "data" / "raw" / "MANIFEST.csv", ROOT / "CITATION.cff", ROOT / "CHANGELOG.md", ROOT / "LICENSE-DATA", ROOT / "README.md",
-] + [ROOT / "docs" / f for f in ("METHODOLOGY.md", "DATA_DICTIONARY.md", "SOURCES.md", "DATA_GOVERNANCE_AUDIT.md", "LEGAL_LAYER.md", "RESEARCH_DESIGN.md", "ROADMAP.md")]
+] + [ROOT / "dist" / f"DIRG_Observatory_v{VERSION}.xlsx"] + [ROOT / "docs" / f for f in ("METHODOLOGY.md", "DATA_DICTIONARY.md", "SOURCES.md", "DATA_GOVERNANCE_AUDIT.md", "LEGAL_LAYER.md", "RESEARCH_DESIGN.md", "ROADMAP.md")]
 
 
 def main() -> Path:

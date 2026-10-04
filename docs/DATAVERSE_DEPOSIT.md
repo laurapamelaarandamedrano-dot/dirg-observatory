@@ -5,12 +5,14 @@ The GitHub repository is the computational layer; the scholarly repository is th
 ## Build the package
 ```bash
 python -m src.run_pipeline
+python scripts/make_workbook.py     # writes dist/DIRG_Observatory_v0.1.0.xlsx (reader-friendly companion)
 python scripts/make_deposit.py      # writes dist/dirg-observatory-v0.1.0-dataverse.zip
 ```
 
 ## Contents
 | File | Description |
 |---|---|
+| `DIRG_Observatory_v0.1.0.xlsx` | Everything in one workbook with a Guide sheet: SRTI matrix, pillars, indicators, scenarios, sensitivity, coverage, dictionary, sources, register, governance, quality checks, full observations |
 | `observations.csv` | Long table, state × year × variable, with status, sources, flags |
 | `index_results.csv` | SRTI, RBI and all sensitivity scenarios; Monte Carlo intervals |
 | `coverage.csv` | Coverage scores and tiers |
