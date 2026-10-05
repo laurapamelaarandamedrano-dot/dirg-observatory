@@ -13,7 +13,7 @@ A reproducible research instrument for studying where digital infrastructure, wa
 | **The index** | The **Sociotechnical Resource Tension Index (SRTI)** averages four pillars (water, energy-system intensity, digital infrastructure, territorial vulnerability) on pooled 0–100 scales. The **Resource Baseline Index (RBI)** drops the digital pillar so resource pressure can be read without assuming infrastructure is part of it. |
 | **Uncertainty** | Every value carries an epistemic status (observed, administrative, documentary, geospatial, derived, estimated, modelled, unknown). Every territory-year has a coverage score and tier, shown on the map as texture. Eight alternative specifications and 2,000 random weightings give rank intervals. |
 | **What it does not claim** | Causation, harm, illegality or responsibility of any actor. The data model has no company field, and operator identities are not collected. |
-| **Observatory** | `https://<user>.github.io/<repo>/` once GitHub Pages is enabled (Settings → Pages → Source: GitHub Actions). |
+| **Observatory** | <https://laurapamelaarandamedrano-dot.github.io/dirg-observatory/> |
 
 ## Reproduce
 
